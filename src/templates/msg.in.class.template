@@ -1,0 +1,19 @@
+/**
+ * @brief ${message} in.
+ * @author ${author}
+ * @date ${yyyy}-${mm}-${dd}
+ */
+class ${message}In : public o3d::net::NetMessageInHelper<${message}In, ${messageId}>
+{
+public:
+
+    @{public_members}
+
+    virtual o3d::net::NetMessage* readFromBuffer(o3d::net::NetBuffer* buffer);
+
+    virtual void run(void *context);
+
+private:
+
+    @{private_members}
+};

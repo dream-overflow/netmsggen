@@ -1,0 +1,8 @@
+o3d::net::RegisterNetMessageIn<${message}In>::R register${message}In(${messageFactoryInstance});
+
+o3d::net::NetMessage* ${message}In::readFromBuffer(o3d::net::NetBuffer* buffer)
+{
+    @{readFromBuffer}
+
+    return nullptr;
+}

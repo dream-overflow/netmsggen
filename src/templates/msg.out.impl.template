@@ -1,0 +1,6 @@
+o3d::net::NetMessage* ${message}Out::writeToBuffer(o3d::net::NetBuffer* buffer)
+{
+    @{writeToBuffer}
+
+    return nullptr;
+}

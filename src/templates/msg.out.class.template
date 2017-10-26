@@ -1,0 +1,19 @@
+/**
+ * @brief ${message} out.
+ * @author ${author}
+ * @date ${yyyy}-${mm}-${dd}
+ */
+class ${message}Out : public o3d::net::NetMessageOutHelper<${messageId}>
+{
+public:
+
+    @{public_members}
+
+    @{setters}
+
+    virtual o3d::net::NetMessage* writeToBuffer(o3d::net::NetBuffer* buffer);
+
+private:
+
+    @{private_members}
+};

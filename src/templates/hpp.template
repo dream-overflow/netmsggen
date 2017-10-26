@@ -1,0 +1,15 @@
+@{license}
+
+#ifndef _${NS}_${FILENAME}_${HPP}
+#define _${NS}_${FILENAME}_${HPP}
+
+#include <o3d/net/NetMessageAdapter.h>
+@{includes}
+
+namespace ${ns} {
+
+@{content}
+
+} // namespace ${ns}
+
+#endif // _${NS}_${FILENAME}_${HPP}

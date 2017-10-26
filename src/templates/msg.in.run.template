@@ -1,0 +1,4 @@
+void ${message}In::run(void *context)
+{
+    // implement here, this file is not regenerated until it exists
+}

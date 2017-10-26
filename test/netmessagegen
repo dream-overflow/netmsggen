@@ -1,0 +1,15 @@
+version = 1
+author = Frederic SCHERMA
+client.namespace = lgc
+server.namespace = lgs
+client.messageFactory.instance = MessageFactory::instance()
+server.messageFactory.instance = MessageFactory::instance()
+client.messageFactory.header = "../MessageFactory.h"
+server.messageFactory.header = "../MessageFactory.h"
+hppext = h
+cppext = cpp
+input = ../test
+server.output = server
+client.output = client
+templates = ../src/templates
+export = both
