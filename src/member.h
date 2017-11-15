@@ -1,7 +1,7 @@
 /**
  * @file member.h
  * @brief 
- * @author Frederic SCHERMA (frederic.scherma@gmail.com)
+ * @author Frederic SCHERMA (frederic.scherma@dreamoverflow.org)
  * @date 2013-11-19
  * @copyright Copyright (c) 2001-2017 Dream Overflow. All rights reserved.
  * @details 
@@ -142,7 +142,7 @@ private:
 /**
  * @brief Abstract member class helper
  * @date 2013-11-19
- * @author Frederic SCHERMA (frederic.scherma@gmail.com)
+ * @author Frederic SCHERMA (frederic.scherma@dreamoverflow.org)
  */
 template <class T, UInt32 E>
 class MemberHelper : public Member
