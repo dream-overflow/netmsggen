@@ -9,7 +9,7 @@
 
 #include <o3d/core/architecture.h>
 #include <o3d/core/main.h>
-#include <o3d/core/diskdir.h>
+#include <o3d/core/dir.h>
 #include <o3d/core/filemanager.h>
 #include <o3d/core/stringtokenizer.h>
 #include <o3d/core/smartpointer.h>
@@ -59,20 +59,20 @@ void Main::init()
     m_month = date.buildString("%M");
     m_day = date.buildString("%D");
 
-    DiskDir inPath(m_inPath);
-    if (!inPath.isExist())
+    Dir inPath(m_inPath);
+    if (!inPath.exists())
         O3D_ERROR(E_InvalidParameter("Invalid input path"));
 
-    DiskDir serverOutPath(m_outPath[SERVER]);
-    if (!serverOutPath.isExist())
+    Dir serverOutPath(m_outPath[SERVER]);
+    if (!serverOutPath.exists())
          O3D_ERROR(E_InvalidParameter("Invalid output path"));
 
-    DiskDir clientOutPath(m_outPath[CLIENT]);
-    if (!clientOutPath.isExist())
+    Dir clientOutPath(m_outPath[CLIENT]);
+    if (!clientOutPath.exists())
          O3D_ERROR(E_InvalidParameter("Invalid output path"));
 
-    DiskDir tlpPath(m_tplPath);
-    if (!tlpPath.isExist())
+    Dir tlpPath(m_tplPath);
+    if (!tlpPath.exists())
          O3D_ERROR(E_InvalidParameter("Invalid template path"));
 
     System::print(String::print("%i", m_version), "Generate version");
@@ -148,7 +148,7 @@ Int32 Main::command()
         {
             String messageTo = cmd->getArgs()[2];
 
-            DiskDir source(m_inPath);
+            Dir source(m_inPath);
             if (source.check(message + ".msg") == Dir::SUCCESS)
             {
                 renameMessage(
@@ -161,7 +161,7 @@ Int32 Main::command()
 
             for (Int32 i = 0; i < 2; ++i)
             {
-                DiskDir out(m_outPath[i]);
+                Dir out(m_outPath[i]);
                 if (out.check(message + "In." + m_hppExt) == Dir::SUCCESS)
                 {
                     renameMessageHeader(
@@ -216,13 +216,13 @@ Int32 Main::command()
         // rm, remove a message from source and targets
         if (op == "rm" && message.isValid())
         {
-            DiskDir source(m_inPath);
+            Dir source(m_inPath);
             if (source.check(message + ".msg") == Dir::SUCCESS)
                 source.removeFile(message + ".msg");
 
             for (Int32 i = 0; i < 2; ++i)
             {
-                DiskDir out(m_outPath[i]);
+                Dir out(m_outPath[i]);
                 if (out.check(message + "In." + m_hppExt) == Dir::SUCCESS)
                     out.removeFile(message + "In." + m_hppExt);
                 if (out.check(message + "In." + m_cppExt) == Dir::SUCCESS)
@@ -331,7 +331,6 @@ Int32 Main::main()
 {
     Debug::instance()->setDefaultLog("netmsggen.log");
     Debug::instance()->getDefaultLog().clearLog();
-    Debug::instance()->getDefaultLog().writeHeaderLog();
 
     CommandLine *cmd = Application::getCommandLine();
     if (cmd->getArgs().size() == 0)
@@ -355,8 +354,6 @@ Int32 Main::main()
 
     // Destroy any content
     deletePtr(apps);
-
-    Debug::instance()->getDefaultLog().writeFooterLog();
 
     return 0;
 }
