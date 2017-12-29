@@ -9,7 +9,7 @@
 
 #include "messagefile.h"
 #include "main.h"
-#include <o3d/core/fileinfo.h>
+#include <o3d/core/localfile.h>
 #include <o3d/core/filemanager.h>
 #include <o3d/core/integer.h>
 #include <o3d/core/stringtokenizer.h>
@@ -400,7 +400,7 @@ void MessageFile::writeMessageInRun(const String &outPath, const String &cppExt,
     if (!something)
         return;
 
-    FileInfo fileInfo(outPath + "/" + m_prefix + "In.run." + cppExt);
+    LocalFile fileInfo(outPath + "/" + m_prefix + "In.run." + cppExt);
     if (fileInfo.exists())
         return;
 

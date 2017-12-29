@@ -9,7 +9,7 @@
 
 #include <o3d/core/architecture.h>
 #include <o3d/core/main.h>
-#include <o3d/core/dir.h>
+#include <o3d/core/localdir.h>
 #include <o3d/core/filemanager.h>
 #include <o3d/core/stringtokenizer.h>
 #include <o3d/core/smartpointer.h>
@@ -59,19 +59,19 @@ void Main::init()
     m_month = date.buildString("%M");
     m_day = date.buildString("%D");
 
-    Dir inPath(m_inPath);
+    LocalDir inPath(m_inPath);
     if (!inPath.exists())
         O3D_ERROR(E_InvalidParameter("Invalid input path"));
 
-    Dir serverOutPath(m_outPath[SERVER]);
+    LocalDir serverOutPath(m_outPath[SERVER]);
     if (!serverOutPath.exists())
          O3D_ERROR(E_InvalidParameter("Invalid output path"));
 
-    Dir clientOutPath(m_outPath[CLIENT]);
+    LocalDir clientOutPath(m_outPath[CLIENT]);
     if (!clientOutPath.exists())
          O3D_ERROR(E_InvalidParameter("Invalid output path"));
 
-    Dir tlpPath(m_tplPath);
+    LocalDir tlpPath(m_tplPath);
     if (!tlpPath.exists())
          O3D_ERROR(E_InvalidParameter("Invalid template path"));
 
@@ -148,8 +148,8 @@ Int32 Main::command()
         {
             String messageTo = cmd->getArgs()[2];
 
-            Dir source(m_inPath);
-            if (source.check(message + ".msg") == Dir::SUCCESS)
+            LocalDir source(m_inPath);
+            if (source.check(message + ".msg") == LocalDir::SUCCESS)
             {
                 renameMessage(
                             source.getFullPathName() + "/" + message + ".msg",
@@ -161,8 +161,8 @@ Int32 Main::command()
 
             for (Int32 i = 0; i < 2; ++i)
             {
-                Dir out(m_outPath[i]);
-                if (out.check(message + "In." + m_hppExt) == Dir::SUCCESS)
+                LocalDir out(m_outPath[i]);
+                if (out.check(message + "In." + m_hppExt) == LocalDir::SUCCESS)
                 {
                     renameMessageHeader(
                                 out.getFullPathName() + "/" + message + "In." + m_hppExt,
@@ -171,7 +171,7 @@ Int32 Main::command()
                                 messageTo);
                     out.removeFile(message + "In." + m_hppExt);
                 }
-                if (out.check(message + "In." + m_cppExt) == Dir::SUCCESS)
+                if (out.check(message + "In." + m_cppExt) == LocalDir::SUCCESS)
                 {
                     renameMessageImpl(
                                 out.getFullPathName() + "/" + message + "In." + m_cppExt,
@@ -180,7 +180,7 @@ Int32 Main::command()
                                 messageTo);
                     out.removeFile(message + "In." + m_cppExt);
                 }
-                if (out.check(message + "In.run." + m_cppExt) == Dir::SUCCESS)
+                if (out.check(message + "In.run." + m_cppExt) == LocalDir::SUCCESS)
                 {
                     renameMessageImpl(
                                 out.getFullPathName() + "/" + message + "In.run." + m_cppExt,
@@ -190,7 +190,7 @@ Int32 Main::command()
                     out.removeFile(message + "In.run." + m_cppExt);
                 }
 
-                if (out.check(message + "Out." + m_hppExt) == Dir::SUCCESS)
+                if (out.check(message + "Out." + m_hppExt) == LocalDir::SUCCESS)
                 {
                     renameMessageHeader(
                                 out.getFullPathName() + "/" + message + "Out." + m_hppExt,
@@ -199,7 +199,7 @@ Int32 Main::command()
                                 messageTo);
                     out.removeFile(message + "Out." + m_hppExt);
                 }
-                if (out.check(message + "Out." + m_cppExt) == Dir::SUCCESS)
+                if (out.check(message + "Out." + m_cppExt) == LocalDir::SUCCESS)
                 {
                     renameMessageImpl(
                                 out.getFullPathName() + "/" + message + "Out." + m_cppExt,
@@ -216,23 +216,23 @@ Int32 Main::command()
         // rm, remove a message from source and targets
         if (op == "rm" && message.isValid())
         {
-            Dir source(m_inPath);
-            if (source.check(message + ".msg") == Dir::SUCCESS)
+            LocalDir source(m_inPath);
+            if (source.check(message + ".msg") == LocalDir::SUCCESS)
                 source.removeFile(message + ".msg");
 
             for (Int32 i = 0; i < 2; ++i)
             {
-                Dir out(m_outPath[i]);
-                if (out.check(message + "In." + m_hppExt) == Dir::SUCCESS)
+                LocalDir out(m_outPath[i]);
+                if (out.check(message + "In." + m_hppExt) == LocalDir::SUCCESS)
                     out.removeFile(message + "In." + m_hppExt);
-                if (out.check(message + "In." + m_cppExt) == Dir::SUCCESS)
+                if (out.check(message + "In." + m_cppExt) == LocalDir::SUCCESS)
                     out.removeFile(message + "In." + m_cppExt);
-                if (out.check(message + "In.run." + m_cppExt) == Dir::SUCCESS)
+                if (out.check(message + "In.run." + m_cppExt) == LocalDir::SUCCESS)
                     out.removeFile(message + "In.run." + m_cppExt);
 
-                if (out.check(message + "Out." + m_hppExt) == Dir::SUCCESS)
+                if (out.check(message + "Out." + m_hppExt) == LocalDir::SUCCESS)
                     out.removeFile(message + "Out." + m_hppExt);
-                if (out.check(message + "Out." + m_cppExt) == Dir::SUCCESS)
+                if (out.check(message + "Out." + m_cppExt) == LocalDir::SUCCESS)
                     out.removeFile(message + "Out." + m_cppExt);
             }
 
